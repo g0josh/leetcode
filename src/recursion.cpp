@@ -105,6 +105,36 @@ ListNode* reverseLinkedListR(ListNode* head){
     return temp;
 }
 
+struct TreeNode{
+    int value;
+    TreeNode* left = NULL;
+    TreeNode* right = NULL;
+
+public:
+    TreeNode(int v){
+        this->value = v;
+    }
+    TreeNode(int v, TreeNode* l, TreeNode* r){
+        this->value = v;
+        this->left = l;
+        this->right = r;
+    }
+};
+
+TreeNode* searchBST(TreeNode* root, int value){
+    if (root == NULL){
+        return NULL;
+    }else if (value == root->value){
+        return root;
+    }else if (value < root->value){
+        return searchBST(root->left, value);
+    }else if (value > root->value){
+        return searchBST(root->right, value);
+    }else{
+        return NULL;
+    }
+}
+
  int main(int argc, char** argv){
     // reverseString(word);
     // std::string s = "hell";
@@ -122,6 +152,8 @@ ListNode* reverseLinkedListR(ListNode* head){
     // }
     // std::cout << std::endl;
 
+/*
+    //Linked lists
     ListNode* linkedList = new ListNode({1});
     createLinkedList(linkedList, std::vector<int>{2,3,4,5}, 0);
     std::cout << "Original Linked list: ";
@@ -136,4 +168,12 @@ ListNode* reverseLinkedListR(ListNode* head){
     // ListNode* rRLinkedList = reverseLinkedListR(sLinkedList);
     // std::cout << "Recursively reversed linked list: ";
     // printLinkedList(rRLinkedList);
+*/
+    //BST
+    TreeNode* root = new TreeNode({4});
+    root->left = new TreeNode({2});
+    root->right = new TreeNode({7});
+    root->left->left = new TreeNode({1});
+    root->left->right = new TreeNode({3});
+    TreeNode* found = searchBST(root, 5);
 }
