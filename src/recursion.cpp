@@ -1,62 +1,60 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <utility>
 
-// void reverseString(std::string& word){
-//     // if (word.size() == 1) {
-//     //     std::cout << word[word.size() -1];
-//     //     reverseString(word.substr(0, word.size()-1));
-//     // }
+//This will not work as inner is a copy 
+void reverseString(std::string &word){
+    if (word.size() < 2) {
+        return;
+    }
+    std::swap(word[0], word[word.size()-1]);
+    std::string inner = word.substr(1, word.size()-2);
+    reverseString(inner);
+}
 
-//     if (word.size() > 1) {
-//         char i = word[0];
-//         word[0] = word[word.size()-1];
-//         word[word.size()-1] = i;
-//         reverseString(word.substr(word[1], word[word.size()-1]));
-//     }
-// }
+void _reverseVector(std::vector<char>::iterator start, std::vector<char>::iterator end){
+    if (end - start > 0) {
+        char i = *start;
+        *start = *end;
+        *end = i;
+        _reverseVector(start+1, end-1);
+    }
 
-// void _reverseVector(std::vector<char>::iterator start, std::vector<char>::iterator end){
-//     if (end - start > 0) {
-//         char i = *start;
-//         *start = *end;
-//         *end = i;
-//         _reverseVector(start+1, end-1);
-//     }
+}
 
-// }
+void reverseVector(std::vector<char>& v){
+    _reverseVector(v.begin(), v.end()-1);
+}
 
-// void reverseVector(std::vector<char>& v){
-//     _reverseVector(v.begin(), v.end()-1);
-// }
+void reverseArray(char s[]) {
+    if (strlen(s) > 1) {
+        char i = s[0];
+        s[0] = s[strlen(s) -1];
+        s[strlen(s) - 1] = i
+        reverseArray()
 
-// void reverseArray(char s[]) {
-//     if (strlen(s) > 1) {
-//         char i = s[0];
-//         s[0] = s[strlen(s) -1];
-//         s[strlen(s) - 1] = i
-//         reverseArray()
+    }
+}
 
-//     }
-// }
-
-// int factorial(const int nu)
-// {
-//     if (nu == 1) {
-//         return 1;
-//     }else{
-//         return nu + factorial(nu-1);
-//     }
-// }
-
-
-struct ListNode
+int factorial(const int nu)
 {
+    if (nu == 1) {
+        return 1;
+    }else{
+        return nu + factorial(nu-1);
+    }
+}
+
+struct ListNode{
     int value;
     ListNode* next;
 };
 
 void createLinkedList(ListNode* head, std::vector<int> values, int index){
+    if (head == NULL){
+        return;
+    }
     head->next = new ListNode({values[index]});
     if (index+1 < values.size()){
         createLinkedList(head->next, values, index+1);
@@ -135,22 +133,29 @@ TreeNode* searchBST(TreeNode* root, int value){
     }
 }
 
+std::vector<int> getPascalTriangleRow(int rowIndex){
+    if (rowIndex == 0){
+        return std::vector<int>{1};
+    }
+    if (rowIndex == 1){
+        return std::vector<int>{1,1};
+    }
+    std::vector<int> curr = getPascalTriangleRow(rowIndex-1);
+    int prev = 1; 
+    for (int i = 1; i < curr.size(); i++){
+        int sum = curr[i] + prev;
+        prev = curr[i];
+        curr[i] = sum;
+    }
+    curr.push_back(1);
+    return curr;
+}
+
  int main(int argc, char** argv){
-    // reverseString(word);
-    // std::string s = "hell";
-    // std::vector<char> vc;
-    // std::cout << "Original String: ";
-    // for (int i=0; i<s.size(); i++){
-    //     std::cout << s[i];
-    //     vc.push_back(s[i]);
-    // }
-    // std::cout << std::endl;
-    // reverseVector(vc);
-    // std::cout << "New String: ";
-    // for (int i=0; i<vc.size(); i++){
-    //     std::cout << vc.at(i);
-    // }
-    // std::cout << std::endl;
+    // reverseString
+    std::string word = "hello";
+    reverseString(word);
+    std::cout << "Reversed string : " << word << "\n";
 
 /*
     //Linked lists
@@ -166,14 +171,21 @@ TreeNode* searchBST(TreeNode* root, int value){
     printLinkedList(rILinkedList);
 
     // ListNode* rRLinkedList = reverseLinkedListR(sLinkedList);
-    // std::cout << "Recursively reversed linked list: ";
-    // printLinkedList(rRLinkedList);
-*/
-    //BST
-    TreeNode* root = new TreeNode({4});
+    // std::cout << "Recursive        currNode->next = prevNode;
+    // if (word.size() == 1) {
+    //     std::cout << word[word.size() -1];
+    //     reverseString(word.substr(0, word.size()-1));
+    // }
+ode({4});
     root->left = new TreeNode({2});
     root->right = new TreeNode({7});
     root->left->left = new TreeNode({1});
     root->left->right = new TreeNode({3});
     TreeNode* found = searchBST(root, 5);
+*/
+    //Pascal's triangle
+    // std::vector<int> row = getPascalTriangleRow(15);
+    // for (int i = 0; i < row.size(); i++){std::cout<<row[i]<< " ";}
+    // std::cout<<"\n";
+    
 }

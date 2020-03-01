@@ -33,33 +33,16 @@ def printLinkedList(ll):
             break
         _ll = _ll.next
 
-# def swapLinkedList(ll):
-#     # _ll = ll
-#     # head = ll.next
-#     def _swap(node):
-#         if node is not None and node.next is not None:
-#             s = node
-#             e = node.next
-#             s.next = e.next
-#             node = e
-#             node.next = s
-#             _swap(node.next.next)
-#     _swap(ll)
-#     # return _ll
-
-
-def swapLinkedList(node):
-    def _swap(ll):
-        s = ll
-        ll = ll.next
-        ll.next = s
-        # if ll.next.next is None:
-        #     return ll
-        ll.next.next = _swap(ll.next.next)
-    _swap(node)
-    return node
-
-
+def getFibonacci(n):
+    d = {}
+    def fib(n):
+        if n < 2:
+            return n
+        if n in d:
+            return d[n]
+        d[n] = getFibonacci(n-2) + getFibonacci(n-1)
+        return d[n]
+    return fib(n)
 
 if __name__ == "__main__":
     # Reverse String in place
@@ -67,13 +50,9 @@ if __name__ == "__main__":
     # reverseString(l)
     # print(l)
 
-    # Swap linked list
-    ll = createLinkedList([1,2,3,4,5,6])
-    print("Original")
-    printLinkedList(ll)
-    lls = swapLinkedList(ll)
-    print("Swapped")
-    printLinkedList(lls)
+    # fibonacci
+    print(getFibonacci(6))
+
 
 
 
