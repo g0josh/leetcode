@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <utility>
+#include <functional>
 
 //This will not work as inner is a copy 
 void reverseString(std::string &word){
@@ -20,21 +21,10 @@ void _reverseVector(std::vector<char>::iterator start, std::vector<char>::iterat
         *end = i;
         _reverseVector(start+1, end-1);
     }
-
 }
 
 void reverseVector(std::vector<char>& v){
     _reverseVector(v.begin(), v.end()-1);
-}
-
-void reverseArray(char s[]) {
-    if (strlen(s) > 1) {
-        char i = s[0];
-        s[0] = s[strlen(s) -1];
-        s[strlen(s) - 1] = i
-        reverseArray()
-
-    }
 }
 
 int factorial(const int nu)
@@ -133,6 +123,20 @@ TreeNode* searchBST(TreeNode* root, int value){
     }
 }
 
+
+int findBSTDepth(TreeNode* root){
+     if (root == NULL){
+        return 0;
+     }
+     int maxL = findBSTDepth(root->left);
+     int maxR = findBSTDepth(root->right);
+     if ( maxL > maxR) {
+         return maxL+1;
+     }else{
+          return maxR+1;
+     }
+}
+
 std::vector<int> getPascalTriangleRow(int rowIndex){
     if (rowIndex == 0){
         return std::vector<int>{1};
@@ -151,13 +155,21 @@ std::vector<int> getPascalTriangleRow(int rowIndex){
     return curr;
 }
 
- int main(int argc, char** argv){
+int power(double x, int n){
+    if (n < 2){
+        return x;
+    }
+    return (x * power(x, n-1));
+}
+
+int main(int argc, char** argv){
+/*
     // reverseString
     std::string word = "hello";
     reverseString(word);
     std::cout << "Reversed string : " << word << "\n";
 
-/*
+
     //Linked lists
     ListNode* linkedList = new ListNode({1});
     createLinkedList(linkedList, std::vector<int>{2,3,4,5}, 0);
@@ -170,19 +182,26 @@ std::vector<int> getPascalTriangleRow(int rowIndex){
     std::cout << "Iteratively reversed linked list: ";
     printLinkedList(rILinkedList);
 
-    // ListNode* rRLinkedList = reverseLinkedListR(sLinkedList);
-    // std::cout << "Recursive        currNode->next = prevNode;
-    // if (word.size() == 1) {
-    //     std::cout << word[word.size() -1];
-    //     reverseString(word.substr(0, word.size()-1));
-    // }
-ode({4});
-    root->left = new TreeNode({2});
-    root->right = new TreeNode({7});
-    root->left->left = new TreeNode({1});
-    root->left->right = new TreeNode({3});
-    TreeNode* found = searchBST(root, 5);
+    ListNode* rRLinkedList = reverseLinkedListR(sLinkedList);
+    std::cout << "Recursive        currNode->next = prevNode;
+    if (word.size() == 1) {
+        std::cout << word[word.size() -1];
+        reverseString(word.substr(0, word.size()-1));
+    }
 */
+    TreeNode* root = new TreeNode({3});
+    root->left = new TreeNode({9});
+    root->right = new TreeNode({20});
+    root->right->left = new TreeNode({15});
+    root->right->right = new TreeNode({7});
+    TreeNode* found = searchBST(root, 15);
+    if (found != NULL){
+        std::cout << found->value << std::endl;
+    }else{
+        std::cout << "not found" << std::endl;
+    }
+    std::cout << "Tree Depth = " << findBSTDepth(root) << std::endl;
+
     //Pascal's triangle
     // std::vector<int> row = getPascalTriangleRow(15);
     // for (int i = 0; i < row.size(); i++){std::cout<<row[i]<< " ";}

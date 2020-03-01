@@ -44,6 +44,38 @@ def getFibonacci(n):
         return d[n]
     return fib(n)
 
+class TreeNode:
+    def __init__(self, value=0, left=None, right=None):
+        self.value = value
+        self.left = left
+        self.right = right
+
+# def power(x, n):
+#     def _power(x, n):
+#         if n == 0:
+#             return 1
+#         # if n < 2:
+#         #     return p*x
+        
+#         return _power(x*p, x, n-1)
+
+#     if n < 0:
+#         return 1 / _power(1, x, -1*n)
+#     else:
+#         return _power(1, x, n)
+
+def power(x, y): 
+    if (y == 0): 
+        return 1
+    temp = (power(x, int(y / 2)))
+    if (int(y % 2) == 0):    
+        return temp * temp
+    else:
+        if y < 0:
+            
+        else:    
+            return (x * temp * temp) 
+
 if __name__ == "__main__":
     # Reverse String in place
     # l = ['h','e','l','l','o']
@@ -52,6 +84,7 @@ if __name__ == "__main__":
 
     # fibonacci
     print(getFibonacci(6))
+    print(power(1.00001,0.5))
 
 
 
