@@ -16,20 +16,24 @@ class ListNode:
         self.next = None
 
 def createLinkedList(values):
+    if len(values) == 0:
+        return ListNode(None)
     head = ListNode(values[0])
     def _create(node,index):
         newNode = ListNode(values[index])
         node.next = newNode
         if index + 1 < len(values):
             _create(newNode, index+1)
-    _create(head,1)
+    if len(values) > 1:
+        _create(head,1)
     return head
 
 def printLinkedList(ll):
     _ll = ll
     while True:
-        print(_ll.value)
+        print(_ll.value, end=" ")
         if _ll.next is None:
+            print()
             break
         _ll = _ll.next
 
@@ -50,20 +54,6 @@ class TreeNode:
         self.left = left
         self.right = right
 
-# def power(x, n):
-#     def _power(x, n):
-#         if n == 0:
-#             return 1
-#         # if n < 2:
-#         #     return p*x
-        
-#         return _power(x*p, x, n-1)
-
-#     if n < 0:
-#         return 1 / _power(1, x, -1*n)
-#     else:
-#         return _power(1, x, n)
-
 def power(x, y): 
     if (y == 0): 
         return 1
@@ -71,10 +61,27 @@ def power(x, y):
     if (int(y % 2) == 0):    
         return temp * temp
     else:
-        if y < 0:
-            
-        else:    
+        if y < 0 : 
+            return (temp*temp)/x
+        else:
             return (x * temp * temp) 
+
+def mergeTwoLists(l1, l2):
+    if l1 is None and l2 is None:
+        return l1
+    if l1 is None and l2 is not None:
+        return l2
+    if l2 is None:
+        return l1
+    if l1.value < l2.value:
+        l1.next = mergeTwoLists(l1.next, l2)
+        return l1
+    else:
+        temp1 = l1
+        temp2 = l2.next
+        l1 = l2
+        l1.next = temp1
+        return mergeTwoLists(l1, temp2)
 
 if __name__ == "__main__":
     # Reverse String in place
@@ -83,8 +90,19 @@ if __name__ == "__main__":
     # print(l)
 
     # fibonacci
-    print(getFibonacci(6))
-    print(power(1.00001,0.5))
+    # print(getFibonacci(6))
+    # print(power(2,-2))
+
+    # Merge linked lists
+    l1 = createLinkedList([])
+    print("l1 = ", end = " ")
+    printLinkedList(l1)
+    l2 = createLinkedList([0])
+    print("l2 = ", end = " ")
+    printLinkedList(l2)
+    l = mergeTwoLists(None,l2)
+    print("Merged list = ", end = " ")
+    printLinkedList(l)
 
 
 
