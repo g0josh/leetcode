@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+import math
+
 def reverseString(l):
     def reverse(first, last):
         print("Got ", first, last)
@@ -83,6 +85,15 @@ def mergeTwoLists(l1, l2):
         l1.next = temp1
         return mergeTwoLists(l1, temp2)
 
+def kthGrammar(N, K):
+    if N == 1:
+        return 0
+    else:
+        value = kthGrammar(N-1, math.ceil(K/2))
+        _result = [0,1] if value == 0 else [1,0]
+        return _result[1] if (K%2) == 0 else _result[0]
+    
+
 if __name__ == "__main__":
     # Reverse String in place
     # l = ['h','e','l','l','o']
@@ -103,6 +114,7 @@ if __name__ == "__main__":
     l = mergeTwoLists(None,l2)
     print("Merged list = ", end = " ")
     printLinkedList(l)
+    print("Kth grammar 4, 5 = ", kthGrammar(4,5))
 
 
 
