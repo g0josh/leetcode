@@ -56,6 +56,13 @@ class TreeNode:
         self.left = left
         self.right = right
 
+def printTree(root):
+    print(f"{root.value}", end=" ")
+    if root.left is not None:
+        printTree(root.left)
+    if root.right is not None:
+        printTree(root.right)
+
 def power(x, y): 
     if (y == 0): 
         return 1
@@ -92,11 +99,30 @@ def kthGrammar(N, K):
         value = kthGrammar(N-1, math.ceil(K/2))
         _result = [0,1] if value == 0 else [1,0]
         return _result[1] if (K%2) == 0 else _result[0]
-    
+
+def getUniqueBST(N):
+    def uniqueBST(start, end):
+        result = []
+        if start > end:
+            result.append(None)
+            return result
+        for i in range(start, end+1):
+            leftTrees = uniqueBST(start, i-1)
+            rightTrees = uniqueBST(i+1, end)
+            for j in leftTrees:
+                for k in rightTrees:
+                    node = TreeNode(i)
+                    node.left = j
+                    node.right = k
+                    result.append(node)
+        return result
+    if N < 1:
+        return []
+    return uniqueBST(1, N)
 
 if __name__ == "__main__":
     # Reverse String in place
-    # l = ['h','e','l','l','o']
+    # l = ['h','e','l','l','o']left
     # reverseString(l)
     # print(l)
 
@@ -115,6 +141,10 @@ if __name__ == "__main__":
     print("Merged list = ", end = " ")
     printLinkedList(l)
     print("Kth grammar 4, 5 = ", kthGrammar(4,5))
+    r = (getUniqueBST(0))
+    for i in r:
+        printTree(i)
+        print()
 
 
 
