@@ -1,10 +1,13 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(leetcode VERSION 1.0 LANGUAGES CXX)
+project(leetcode VERSION 1.0.0 LANGUAGES CXX)
 
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+add_library(
+    array-easy
+    include/array_easy.hpp 
+    src/array_easy.cpp
+)
 
+add_executable(leetcode src/main.cpp)
 
-add_executable(leetcode  src/recursion.cpp)
+target_link_libraries(leetcode PRIVATE array-easy)
