@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+#include <string>
+#include <unordered_map>
 
 namespace array_easy{
 
@@ -99,12 +101,123 @@ void rotate(std::vector<int>& nums, int k) {
     }
 }
 
+//https://leetcode.com/problems/contains-duplicate/
+bool containsDuplicate(std::vector<int>& nums) {
+    std::unordered_map<int,int> map;
+    for (int i = 0; i < nums.size(); i++){
+        auto got = map.find(nums[i]);
+        if (got == map.end()){
+            map[nums[i]] = nums[i];
+        }else{
+            return true;
+        }
+    }
+    return false;
+}
+
+//https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/549/
+int singleNumber(std::vector<int>& nums) {
+    // std::unordered_map<int, int> map;
+    // for (int num:nums){
+    //     std::unordered_map<int, int>::iterator got = map.find(num);
+    //     if (got == map.end()){
+    //         map[num] = 1;
+    //     }else{
+    //         map.erase(num);
+    //     }
+    // }
+    // if (map.empty()){
+    //     return 0;
+    // }else{
+    //     return map.begin()->first;
+    // }
+
+    //better approach with XOR
+    //if a == b, a xor b = 0
+    //and a xor 0 = a
+    int result = 0;
+    for (int num:nums){
+        result = result ^ num;
+    }
+    return result;
+}
+
+//https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/674/
+std::vector<int> intersect(std::vector<int>& nums1, std::vector<int>& nums2) {
+    std::vector<int> result;
+    std::unordered_map<int,int> big_map;
+    std::unordered_map<int,int> small_map;
+    std::vector<int> big = nums1;
+    std::vector<int> small = nums2;
+    if (nums1.size()<nums2.size()){
+        big = nums2;
+        small = nums1;
+    }
+    std::unordered_map<int,int>::iterator got_big, got_small;
+    for (int i = 0; i<big.size(); i++){
+        if (i < small.size() && big[i] == small[i]){
+            result.push_back(big[i]);
+            continue;
+        }
+        got_big = big_map.find(big[i]);
+        got_small = small_map.find(big[i]);
+        
+        if (got_small != small_map.end()){
+            if (got_small->second > 1){
+                got_small->second -= 1;
+            }else{
+                small_map.erase(got_small);
+            }
+            result.push_back(got_small->first);
+        }else if (got_big == big_map.end()){
+            big_map[big[i]] = 1;
+        }else{
+            big_map[big[i]] += 1;
+        }
+
+        if (i+1 > small.size()){
+            continue;
+        }
+        got_big = big_map.find(small[i]);
+        got_small = small_map.find(small[i]);
+
+        if (got_big != big_map.end()){
+            if (got_big->second > 1){
+                got_big->second -= 1;
+            }else{
+                big_map.erase(got_big);
+            }
+            result.push_back(got_big->first);
+        }else if (got_small == small_map.end()){
+            small_map[small[i]] = 1;
+        }else{
+            small_map[small[i]] += 1;
+        }
+    }
+    return result;
+}
+
+//https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/559/
+std::vector<int> plusOne(std::vector<int>& digits) {
+    
+}
+
 // close namespace
 }
 
 int main(){
-    std::vector<int> al = {1,2,3,4,5,6};
+    std::vector<int> al = {4,9,5};
     array_easy::printVector(al, -1);
     array_easy::rotate(al, 2);
     array_easy::printVector(al, -1);
+    std::cout<<"Contains duplicate : "<<array_easy::containsDuplicate(al)<<"\n";
+
+    //find the only number that appears once
+    std::cout <<"The number that only appears once = "<<array_easy::singleNumber(al)<<"\n";
+
+    //find intersection of arrays
+    std::vector<int> al2 = {9,4,9,8,4};
+    array_easy::printVector(al2, -1);
+    std::cout<<"Intersecting elements = ";
+    array_easy::printVector(array_easy::intersect(al, al2), -1);
 }
