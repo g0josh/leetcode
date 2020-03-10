@@ -199,7 +199,50 @@ std::vector<int> intersect(std::vector<int>& nums1, std::vector<int>& nums2) {
 
 //https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/559/
 std::vector<int> plusOne(std::vector<int>& digits) {
-    
+    int carry = 1;
+    std::vector<int> result (digits.size());
+    std::vector<int>::reverse_iterator rev_result = result.rbegin();
+    for (auto i=digits.rbegin(); i<digits.rend();i++){
+        int j = (*i) + carry;
+        if (j>9){
+            (*rev_result) = 0;
+            carry = 1;
+        }else{
+            (*rev_result) = j;
+            carry = 0;
+        }
+        rev_result++;
+    }
+    if (carry == 1){
+        result.insert(result.begin(), 1);
+    }
+    return result;
+}
+
+//move zeroes
+void moveZeroes(std::vector<int>& nums) {
+    int* curr_pos = nums.data();
+    std::vector<int*> empty_spots;
+    int next_empty_spot = 0;
+    int zero_count = 0;
+    for (int i = 0; i < nums.size(); i++){
+        if (*curr_pos == 0){
+            empty_spots.push_back(curr_pos);
+            zero_count++;
+        }else{
+            if (empty_spots.size() != 0 && next_empty_spot < empty_spots.size()){
+                *(empty_spots[next_empty_spot]) = *curr_pos;
+                empty_spots.push_back(curr_pos);
+                next_empty_spot++;
+            }
+        }
+        curr_pos++;
+    }
+    std::vector<int>::reverse_iterator rev_nums = nums.rbegin();
+    for (;zero_count>0;zero_count--){
+        *rev_nums = 0;
+        rev_nums++;
+    }
 }
 
 // close namespace
@@ -220,4 +263,19 @@ int main(){
     array_easy::printVector(al2, -1);
     std::cout<<"Intersecting elements = ";
     array_easy::printVector(array_easy::intersect(al, al2), -1);
+
+    //plus one
+    al = {9,9,9};
+    std::cout<<"plus one digits of ";
+    array_easy::printVector(al, -1);
+    std::cout<<"= ";
+    array_easy::printVector(array_easy::plusOne(al), -1);
+
+    //move zeroes
+    al = {0,1,0,3,12,0};
+    std::cout<<"move zeroes of ";
+    array_easy::printVector(al, -1);
+    std::cout<<"= ";
+    array_easy::moveZeroes(al);
+    array_easy::printVector(al, -1);
 }
