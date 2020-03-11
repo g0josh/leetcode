@@ -4,7 +4,7 @@
 #include <utility>
 #include <functional>
 
-//This will not work as inner is a copy 
+//This will not work as inner is a copy
 void reverseString(std::string &word){
     if (word.size() < 2) {
         return;
@@ -145,7 +145,7 @@ std::vector<int> getPascalTriangleRow(int rowIndex){
         return std::vector<int>{1,1};
     }
     std::vector<int> curr = getPascalTriangleRow(rowIndex-1);
-    int prev = 1; 
+    int prev = 1;
     for (int i = 1; i < curr.size(); i++){
         int sum = curr[i] + prev;
         prev = curr[i];
@@ -162,49 +162,49 @@ int power(double x, int n){
     return (x * power(x, n-1));
 }
 
-int main(int argc, char** argv){
-/*
-    // reverseString
-    std::string word = "hello";
-    reverseString(word);
-    std::cout << "Reversed string : " << word << "\n";
+// int main(int argc, char** argv){
+// /*
+//     // reverseString
+//     std::string word = "hello";
+//     reverseString(word);
+//     std::cout << "Reversed string : " << word << "\n";
 
 
-    //Linked lists
-    ListNode* linkedList = new ListNode({1});
-    createLinkedList(linkedList, std::vector<int>{2,3,4,5}, 0);
-    std::cout << "Original Linked list: ";
-    printLinkedList(linkedList);
-    ListNode* sLinkedList = swapPairsLinkedList(linkedList);
-    std::cout << "Swapped pairs Linked list: ";
-    printLinkedList(sLinkedList);
-    ListNode* rILinkedList = reverseLinkedListI(sLinkedList);
-    std::cout << "Iteratively reversed linked list: ";
-    printLinkedList(rILinkedList);
+//     //Linked lists
+//     ListNode* linkedList = new ListNode({1});
+//     createLinkedList(linkedList, std::vector<int>{2,3,4,5}, 0);
+//     std::cout << "Original Linked list: ";
+//     printLinkedList(linkedList);
+//     ListNode* sLinkedList = swapPairsLinkedList(linkedList);
+//     std::cout << "Swapped pairs Linked list: ";
+//     printLinkedList(sLinkedList);
+//     ListNode* rILinkedList = reverseLinkedListI(sLinkedList);
+//     std::cout << "Iteratively reversed linked list: ";
+//     printLinkedList(rILinkedList);
 
-    ListNode* rRLinkedList = reverseLinkedListR(sLinkedList);
-    std::cout << "Recursive        currNode->next = prevNode;
-    if (word.size() == 1) {
-        std::cout << word[word.size() -1];
-        reverseString(word.substr(0, word.size()-1));
-    }
-*/
-    TreeNode* root = new TreeNode({3});
-    root->left = new TreeNode({9});
-    root->right = new TreeNode({20});
-    root->right->left = new TreeNode({15});
-    root->right->right = new TreeNode({7});
-    TreeNode* found = searchBST(root, 15);
-    if (found != NULL){
-        std::cout << found->value << std::endl;
-    }else{
-        std::cout << "not found" << std::endl;
-    }
-    std::cout << "Tree Depth = " << findBSTDepth(root) << std::endl;
+//     ListNode* rRLinkedList = reverseLinkedListR(sLinkedList);
+//     std::cout << "Recursive        currNode->next = prevNode;
+//     if (word.size() == 1) {
+//         std::cout << word[word.size() -1];
+//         reverseString(word.substr(0, word.size()-1));
+//     }
+// */
+//     TreeNode* root = new TreeNode({3});
+//     root->left = new TreeNode({9});
+//     root->right = new TreeNode({20});
+//     root->right->left = new TreeNode({15});
+//     root->right->right = new TreeNode({7});
+//     TreeNode* found = searchBST(root, 15);
+//     if (found != NULL){
+//         std::cout << found->value << std::endl;
+//     }else{
+//         std::cout << "not found" << std::endl;
+//     }
+//     std::cout << "Tree Depth = " << findBSTDepth(root) << std::endl;
 
-    //Pascal's triangle
-    // std::vector<int> row = getPascalTriangleRow(15);
-    // for (int i = 0; i < row.size(); i++){std::cout<<row[i]<< " ";}
-    // std::cout<<"\n";
-    
-}
+//     //Pascal's triangle
+//     // std::vector<int> row = getPascalTriangleRow(15);
+//     // for (int i = 0; i < row.size(); i++){std::cout<<row[i]<< " ";}
+//     // std::cout<<"\n";
+
+// }

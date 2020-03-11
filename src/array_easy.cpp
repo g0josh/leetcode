@@ -5,16 +5,6 @@
 
 namespace array_easy{
 
-template <typename T>
-void printVector(const std::vector<T>& V, int upto){
-    (upto < 0)?upto = V.size():upto = upto;
-    std::cout<<"[ ";
-    for (int i = 0; i<upto; i++){
-        std::cout<<V[i]<<" ";
-    }
-    std::cout<<"]"<<std::endl;
-}
-
 //https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/727/
 int removeSortedDuplicates(std::vector<int>& nums){
     if (nums.size() < 2){
@@ -161,7 +151,7 @@ std::vector<int> intersect(std::vector<int>& nums1, std::vector<int>& nums2) {
         }
         got_big = big_map.find(big[i]);
         got_small = small_map.find(big[i]);
-        
+
         if (got_small != small_map.end()){
             if (got_small->second > 1){
                 got_small->second -= 1;
@@ -248,34 +238,34 @@ void moveZeroes(std::vector<int>& nums) {
 // close namespace
 }
 
-int main(){
-    std::vector<int> al = {4,9,5};
-    array_easy::printVector(al, -1);
-    array_easy::rotate(al, 2);
-    array_easy::printVector(al, -1);
-    std::cout<<"Contains duplicate : "<<array_easy::containsDuplicate(al)<<"\n";
+// int main(){
+//     std::vector<int> al = {4,9,5};
+//     array_easy::printVector(al, -1);
+//     array_easy::rotate(al, 2);
+//     array_easy::printVector(al, -1);
+//     std::cout<<"Contains duplicate : "<<array_easy::containsDuplicate(al)<<"\n";
 
-    //find the only number that appears once
-    std::cout <<"The number that only appears once = "<<array_easy::singleNumber(al)<<"\n";
+//     //find the only number that appears once
+//     std::cout <<"The number that only appears once = "<<array_easy::singleNumber(al)<<"\n";
 
-    //find intersection of arrays
-    std::vector<int> al2 = {9,4,9,8,4};
-    array_easy::printVector(al2, -1);
-    std::cout<<"Intersecting elements = ";
-    array_easy::printVector(array_easy::intersect(al, al2), -1);
+//     //find intersection of arrays
+//     std::vector<int> al2 = {9,4,9,8,4};
+//     array_easy::printVector(al2, -1);
+//     std::cout<<"Intersecting elements = ";
+//     array_easy::printVector(array_easy::intersect(al, al2), -1);
 
-    //plus one
-    al = {9,9,9};
-    std::cout<<"plus one digits of ";
-    array_easy::printVector(al, -1);
-    std::cout<<"= ";
-    array_easy::printVector(array_easy::plusOne(al), -1);
+//     //plus one
+//     al = {9,9,9};
+//     std::cout<<"plus one digits of ";
+//     array_easy::printVector(al, -1);
+//     std::cout<<"= ";
+//     array_easy::printVector(array_easy::plusOne(al), -1);
 
-    //move zeroes
-    al = {0,1,0,3,12,0};
-    std::cout<<"move zeroes of ";
-    array_easy::printVector(al, -1);
-    std::cout<<"= ";
-    array_easy::moveZeroes(al);
-    array_easy::printVector(al, -1);
-}
+//     //move zeroes
+//     al = {0,1,0,3,12,0};
+//     std::cout<<"move zeroes of ";
+//     array_easy::printVector(al, -1);
+//     std::cout<<"= ";
+//     array_easy::moveZeroes(al);
+//     array_easy::printVector(al, -1);
+// }
