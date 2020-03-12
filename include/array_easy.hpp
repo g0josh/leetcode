@@ -11,7 +11,7 @@ void printVector(std::vector<T>& V, int upto){
     for (int i = 0; i<upto; i++){
         std::cout<<V[i]<<" ";
     }
-    std::cout<<"]"<<std::endl;
+    std::cout<<"]";
 }
 
 //Remove duplicates in a sorted array
@@ -32,5 +32,7 @@ std::vector<int> intersect(std::vector<int> &nums1, std::vector<int> &nums2);
 std::vector<int> plusOne(std::vector<int> &digits);
 
 void moveZeroes(std::vector<int> &nums);
+
+std::vector<int> twoSum(std::vector<int>& nums, int target);
 
 } // namespace array_easy

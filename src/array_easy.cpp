@@ -5,6 +5,17 @@
 
 namespace array_easy{
 
+//print a vector
+// template <typename T>
+// void printVector(std::vector<T>& V, int upto){
+//     (upto < 0)?upto = V.size():upto = upto;
+//     std::cout<<"[ ";
+//     for (int i = 0; i<upto; i++){
+//         std::cout<<V[i]<<" ";
+//     }
+//     std::cout<<"]";
+// }
+
 //https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/727/
 int removeSortedDuplicates(std::vector<int>& nums){
     if (nums.size() < 2){
@@ -209,7 +220,7 @@ std::vector<int> plusOne(std::vector<int>& digits) {
     return result;
 }
 
-//move zeroes
+//https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/567/
 void moveZeroes(std::vector<int>& nums) {
     int* curr_pos = nums.data();
     std::vector<int*> empty_spots;
@@ -235,10 +246,46 @@ void moveZeroes(std::vector<int>& nums) {
     }
 }
 
+//https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/546/
+std::vector<int> twoSum(std::vector<int>& nums, int target) {
+    std::vector<int> result;
+    // for (int i = 0; i<nums.size(); i++){
+    //     if (nums[i] > target){
+    //         continue;
+    //     }
+    //     for (int j = i+1; j<nums.size(); j++){
+    //         if (nums[j] > target){
+    //             continue;
+    //         }
+    //         if (nums[i] + nums[j] == target){
+    //             result = {i, j};
+    //             return result;
+    //         }else{
+    //             continue;
+    //         }
+    //     }
+    // }
+    // return result;
+
+    std::unordered_map<int, int> map;
+    std::unordered_map<int,int>::iterator got;
+    for (int i = 0; i < nums.size(); i++){
+        int pair = target - nums[i];
+        got = map.find(pair);
+        if  ( got == map.end()){
+            map[nums[i]] = i;
+        }else{
+            result = {got->second, i};
+            return result;
+        }
+    }
+    return result;
+}
+
 // close namespace
 }
 
-// int main(){
+//  int main(){
 //     std::vector<int> al = {4,9,5};
 //     array_easy::printVector(al, -1);
 //     array_easy::rotate(al, 2);
@@ -268,4 +315,11 @@ void moveZeroes(std::vector<int>& nums) {
 //     std::cout<<"= ";
 //     array_easy::moveZeroes(al);
 //     array_easy::printVector(al, -1);
+    //twosum
+//     std::vector<int> vi = {0,4,3,0};
+//     std::cout<<"\ntwo sum of ";
+//     array_easy::printVector(vi, -1);
+//     std::cout<<" = ";
+//     std::vector<int> vir = array_easy::twoSum(vi, 0);
+//     array_easy::printVector( vir, -1);
 // }
