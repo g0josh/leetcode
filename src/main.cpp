@@ -63,4 +63,43 @@ int main(int argc, char** argv){
     vir = array_easy::twoSum(vi, target);
     array_easy::printVector( vir, -1);
 
+    //sudoku validity check
+    std::vector<std::vector<char>> board = {
+        {'8','3','.','.','7','.','.','.','.'},
+        {'6','.','.','1','9','5','.','.','.'},
+        {'.','9','8','.','.','.','.','6','.'},
+        {'8','.','.','.','6','.','.','.','3'},
+        {'4','.','.','8','.','3','.','.','1'},
+        {'7','.','.','.','2','.','.','.','6'},
+        {'.','6','.','.','.','.','2','8','.'},
+        {'.','.','.','4','1','9','.','.','5'},
+        {'.','.','.','.','8','.','.','7','9'}
+        };
+    std::cout<<"\nThe following Sudoku\n";
+    for (int i = 0; i < board.size(); i++){
+        array_easy::printVector(board[i], -1);
+        std::cout<<"\n";
+    }
+    std::string result;
+    array_easy::isValidSudoku(board)?result="is valid":result="is invalid";
+    std::cout<<result<<"\n";
+
+    //rotate square matrix 90 degrees
+    std::cout<<"\nRotated the following matrix 90 degrees\n";
+    std::vector<std::vector<int>> matrix = {
+            {1,2,3},
+            {4,5,6},
+            {7,8,9}
+        };
+    for (int i = 0; i < matrix.size(); i++){
+        array_easy::printVector(matrix[i], -1);
+        std::cout<<"\n";
+    }
+    array_easy::rotateMatrix90(matrix);
+    std::cout<<"result = \n";
+    for (int i = 0; i < matrix.size(); i++){
+        array_easy::printVector(matrix[i], -1);
+        std::cout<<"\n";
+    }
+
 }

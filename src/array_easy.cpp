@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <array>
 #include <string>
 #include <unordered_map>
 
@@ -282,44 +283,76 @@ std::vector<int> twoSum(std::vector<int>& nums, int target) {
     return result;
 }
 
-// close namespace
+//https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/769/
+bool isValidSudoku(std::vector<std::vector<char>>& board) {
+    std::array<std::unordered_map<char,bool>, 9> block_map;
+    std::array<std::unordered_map<char,bool>, 9> column_map;
+    for (int i = 0; i < board.size(); i++){
+        std::unordered_map<char, bool> row_map;
+        for (int j = 0; j < board[i].size(); j++){
+            if (board[i][j] == '.'){
+                continue;
+            }
+            //check row_map
+            auto row_got = row_map.find(board[i][j]);
+            if (row_got != row_map.end()){
+                return false;
+            }else{
+                row_map[board[i][j]] = 1;
+            }
+            //check column map
+            auto column_got = column_map[j].find(board[i][j]);
+            if (column_got != column_map[j].end()){
+                return false;
+            }else{
+                column_map[j][board[i][j]] = 1;
+            }
+            //check block map
+            int block_index = (i/3*3) + (j/3);
+            auto block_got = block_map[block_index].find(board[i][j]);
+            if (block_got == block_map[block_index].end()){
+                block_map[block_index][board[i][j]] = 1;
+            }else{
+                return false;
+            }
+        }
+    }
+    return true;
 }
 
-//  int main(){
-//     std::vector<int> al = {4,9,5};
-//     array_easy::printVector(al, -1);
-//     array_easy::rotate(al, 2);
-//     array_easy::printVector(al, -1);
-//     std::cout<<"Contains duplicate : "<<array_easy::containsDuplicate(al)<<"\n";
+//https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/770/
+void rotateMatrix90(std::vector<std::vector<int>>& matrix) {
+    int r = 0, c = 0, start_r = 0, start_c = 0;
+    int next = matrix[r][c];
+    while (r < matrix.size() && c < matrix[r].size()){
+        std::cout<<"r = "<<r<<" c= "<<c<<" value = "<<matrix[r][c]<<"\n";
+        int target_r = c;
+        int target_c = matrix[r].size() - r - 1;
+        int temp = matrix[target_r][target_c];
+        matrix[target_r][target_c] = next;
+        std::cout<<"target r = "<<target_r<<" c = "<<target_c<<"temp = "<<temp<<"\n";
+        next = temp;
+        r = target_r;
+        c = target_c;
+        if (r == start_r && c == start_c){
+            if (c+1 < matrix[r].size()){
+                c++;
+                start_c = c;
+            }else if(r+1 < matrix.size()){
+                r++;
+                start_r = r;
+            }else{
+                break;
+            }
+        }
+    }
+}
 
-//     //find the only number that appears once
-//     std::cout <<"The number that only appears once = "<<array_easy::singleNumber(al)<<"\n";
-
-//     //find intersection of arrays
-//     std::vector<int> al2 = {9,4,9,8,4};
-//     array_easy::printVector(al2, -1);
-//     std::cout<<"Intersecting elements = ";
-//     array_easy::printVector(array_easy::intersect(al, al2), -1);
-
-//     //plus one
-//     al = {9,9,9};
-//     std::cout<<"plus one digits of ";
-//     array_easy::printVector(al, -1);
-//     std::cout<<"= ";
-//     array_easy::printVector(array_easy::plusOne(al), -1);
-
-//     //move zeroes
-//     al = {0,1,0,3,12,0};
-//     std::cout<<"move zeroes of ";
-//     array_easy::printVector(al, -1);
-//     std::cout<<"= ";
-//     array_easy::moveZeroes(al);
-//     array_easy::printVector(al, -1);
-    //twosum
-//     std::vector<int> vi = {0,4,3,0};
-//     std::cout<<"\ntwo sum of ";
-//     array_easy::printVector(vi, -1);
-//     std::cout<<" = ";
-//     std::vector<int> vir = array_easy::twoSum(vi, 0);
-//     array_easy::printVector( vir, -1);
+// void rotateMatrix902(std::vector<std::vector<int>>& matrix) {
+//     for (int r = 0; r < matrix.size(); r++){
+//         int c = matrix.size() - r;
+//         for (; c < matrix.size())
+//     }
 // }
+
+}// namespace array_easy

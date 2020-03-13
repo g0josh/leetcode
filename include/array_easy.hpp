@@ -35,4 +35,7 @@ void moveZeroes(std::vector<int> &nums);
 
 std::vector<int> twoSum(std::vector<int>& nums, int target);
 
-} // namespace array_easy
+bool isValidSudoku(std::vector<std::vector<char>>&);
+
+void rotateMatrix90(std::vector<std::vector<int>>&);
+}
