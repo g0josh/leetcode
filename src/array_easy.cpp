@@ -6,17 +6,6 @@
 
 namespace array_easy{
 
-//print a vector
-// template <typename T>
-// void printVector(std::vector<T>& V, int upto){
-//     (upto < 0)?upto = V.size():upto = upto;
-//     std::cout<<"[ ";
-//     for (int i = 0; i<upto; i++){
-//         std::cout<<V[i]<<" ";
-//     }
-//     std::cout<<"]";
-// }
-
 //https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/727/
 int removeSortedDuplicates(std::vector<int>& nums){
     if (nums.size() < 2){
@@ -134,7 +123,8 @@ int singleNumber(std::vector<int>& nums) {
     //     return map.begin()->first;
     // }
 
-    //better approach with XOR
+    //better approach with XOR, but assumes that there is
+    //only ONE number that is not repeated
     //if a == b, a xor b = 0
     //and a xor 0 = a
     int result = 0;
@@ -325,34 +315,28 @@ void rotateMatrix90(std::vector<std::vector<int>>& matrix) {
     int r = 0, c = 0, start_r = 0, start_c = 0;
     int next = matrix[r][c];
     while (r < matrix.size() && c < matrix[r].size()){
-        std::cout<<"r = "<<r<<" c= "<<c<<" value = "<<matrix[r][c]<<"\n";
         int target_r = c;
         int target_c = matrix[r].size() - r - 1;
         int temp = matrix[target_r][target_c];
         matrix[target_r][target_c] = next;
-        std::cout<<"target r = "<<target_r<<" c = "<<target_c<<"temp = "<<temp<<"\n";
-        next = temp;
         r = target_r;
         c = target_c;
         if (r == start_r && c == start_c){
-            if (c+1 < matrix[r].size()){
-                c++;
+            if (c+1 < matrix[r].size()-r-1){
+                start_c = ++c;
+            }else if(r+1 < matrix.size()-r-1){
+                start_r = ++r;
+                c = r;
                 start_c = c;
-            }else if(r+1 < matrix.size()){
-                r++;
-                start_r = r;
             }else{
                 break;
             }
+            next = matrix[r][c];
+        }else{
+            next = temp;
         }
+        
     }
 }
-
-// void rotateMatrix902(std::vector<std::vector<int>>& matrix) {
-//     for (int r = 0; r < matrix.size(); r++){
-//         int c = matrix.size() - r;
-//         for (; c < matrix.size())
-//     }
-// }
 
 }// namespace array_easy
