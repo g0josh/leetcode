@@ -4,7 +4,7 @@
 #include <string>
 #include <unordered_map>
 
-namespace array_easy{
+namespace arrays_easy{
 
 //https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/727/
 int removeSortedDuplicates(std::vector<int>& nums){

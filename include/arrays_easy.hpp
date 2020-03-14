@@ -1,18 +1,7 @@
 #pragma once
 #include <vector>
 
-namespace array_easy{
-
-//print a vector
-template <typename T>
-void printVector(std::vector<T>& V, int upto){
-    (upto < 0)?upto = V.size():upto = upto;
-    std::cout<<"[ ";
-    for (int i = 0; i<upto; i++){
-        std::cout<<V[i]<<" ";
-    }
-    std::cout<<"]";
-}
+namespace arrays_easy{
 
 //Remove duplicates in a sorted array
 int removeSortedDuplicates(std::vector<int>&);
