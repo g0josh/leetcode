@@ -3,8 +3,8 @@
 #include "arrays_easy.hpp"
 #include "strings_easy.hpp"
 
-// #define ARRAYS;
-#define STRINGS;
+// #define ARRAYS
+#define STRINGS
 
 //print a vector
 template <typename T>
@@ -132,7 +132,8 @@ int main(int argc, char** argv){
     strings_easy::reverseString(str);
     std::cout<<" and got ";
     printVector(str,-1);
-
+    int input = 1534236469;
+    std::cout<<"\nReversed "<<input<<" to "<<strings_easy::reverse(input);
     
     #pragma endregion
     #endif
