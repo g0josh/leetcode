@@ -141,6 +141,14 @@ int main(int argc, char** argv){
     std::string str2 = "ac";
     str = "bb";
     std::cout<<"\nAre "<<str<<" and "<<str2<<" anagrams?  "<< strings_easy::isAnagram(str, str2)<<"\n";
+
+    // str = "A man, a plan, a canal: Panama";
+    str = "aa";
+    std::cout<<"\nIs "<<str<<" a palyndrome? "<<strings_easy::isPalindrome(str)<<"\n";
+
+    str = "42";
+    std::cout<<"\nAtoi of "<<str<<" = "<<strings_easy::myAtoi(str)<<"\n";
+
     #pragma endregion
     #endif
 
