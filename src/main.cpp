@@ -126,15 +126,18 @@ int main(int argc, char** argv){
     #ifdef STRINGS
     #pragma region 
     
-    std::vector<char> str = {'h','e','l','l','o'};
+    std::vector<char> str_vec = {'h','e','l','l','o'};
     std::cout<<"\nReversed ";
-    printVector(str,-1);
-    strings_easy::reverseString(str);
+    printVector(str_vec,-1);
+    strings_easy::reverseString(str_vec);
     std::cout<<" and got ";
-    printVector(str,-1);
+    printVector(str_vec,-1);
     int input = 1534236469;
-    std::cout<<"\nReversed "<<input<<" to "<<strings_easy::reverse(input);
-    
+    std::cout<<"\nReversed "<<input<<" to "<<strings_easy::reverse(input)<<"\n";
+
+    std::string str = "leetcode";
+    std::cout<<"\nFirst unique char in "<< str << " = "<<strings_easy::firstUniqChar(str)<<"\n";
+
     #pragma endregion
     #endif
 
