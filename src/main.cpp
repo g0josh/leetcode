@@ -138,6 +138,9 @@ int main(int argc, char** argv){
     std::string str = "leetcode";
     std::cout<<"\nFirst unique char in "<< str << " = "<<strings_easy::firstUniqChar(str)<<"\n";
 
+    std::string str2 = "ac";
+    str = "bb";
+    std::cout<<"\nAre "<<str<<" and "<<str2<<" anagrams?  "<< strings_easy::isAnagram(str, str2)<<"\n";
     #pragma endregion
     #endif
 

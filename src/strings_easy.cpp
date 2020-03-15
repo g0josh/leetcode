@@ -68,9 +68,33 @@ int firstUniqChar(std::string s) {
     }
 }
 
+
+bool isAnagram(std::string s, std::string t){
+    if (s.size() != t.size()){
+        return false;
+    }
+    std::array<int, 26> store;
+    store.fill(0);
+    int sum = 0;
+    for (int i=0; i< s.size(); i++){
+        store[ (int)s[i] - 'a' ]++;
+        store[ (int)t[i] - 'a' ]--;
+    }
+    for (int i = 0; i< 26; i++){
+        if (store[i] != 0){
+            return false;
+        }
+    }
+    return true;
+}
+
 } //namespace strings_easy
 
 // int main(int argc, char** argv){
 //     std::string str = "loveleetcode";
-//     std::cout<<"\nFirst unique char in "<< str << " = "<<strings_easy::firstUniqChar(str)<<"\n";
+//     // std::cout<<"\nFirst unique char in "<< str << " = "<<strings_easy::firstUniqChar(str)<<"\n";
+
+//     std::string str2 = "car";
+//     str = "rat";
+//     std::cout<<"\nAre "<<str<<" and "<<str2<<" anagrams?  "<< strings_easy::isAnagram(str, str2)<<"\n";
 // }
