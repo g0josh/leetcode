@@ -144,10 +144,8 @@ int myAtoi(std::string str){
         }else{
             if (result > INT32_MAX/10 || result*10 > INT32_MAX - ci){
                 if (sign == -1){
-                    std::cout<<"got -1 "<<INT32_MIN<<" | "; 
                     return INT32_MIN;
                 }else{
-                    std::cout<<"got +1 "<<INT32_MAX<< " | "; 
                     return INT32_MAX;
                 }
             }
@@ -156,16 +154,60 @@ int myAtoi(std::string str){
         }
     }
     return result*sign;
+}
 
+//https://leetcode.com/problems/count-and-say/
+std::string countAndSay(int n) {
+    if (n < 2){
+        return "1";
+    }
+    std::string result = "";
+    std::string prevResult = "1";
+    char prev = '0';
+    int count = 0;
+    for (int i = 1; i < n; i++){
+        for (int j = 0; j < prevResult.size(); j++){
+            if (prev == '0' || prev == prevResult[j]){
+                prev = prevResult[j];
+                count++;
+            }else{
+                result.append(std::to_string(count));
+                result += prev;
+                prev = prevResult[j];
+                count = 1;
+            }
+        }
+        result.append(std::to_string(count));
+        result += prev;
+        prevResult = result;
+        result = "";
+        prev = '0';
+        count = 0;
+        // std::cout<<prevResult<<"\n";
+    }
+    return prevResult;
+}
+
+std::string longestCommonPrefix(std::vector<std::string>& strs) {
+    if (strs.size() < 1){ return "";}
+    int index = 0;
+    bool stop = false;
+    while (index < strs[0].size() && !stop){
+        char curr = strs[0][index];
+        for (int i = 1; i < strs.size(); i++){
+            if (index > strs[i].size()-1 || strs[i][index] != curr){
+                stop = true;
+                break;
+            }
+        }
+        if (stop){break;}
+        index ++;
+    }
+    return strs[0].substr(0, index);
 }
 
 } //namespace strings_easy
 
 // int main(int argc, char** argv){
-//     std::string str = "loveleetcode";
-//     // std::cout<<"\nFirst unique char in "<< str << " = "<<strings_easy::firstUniqChar(str)<<"\n";
-
-//     std::string str2 = "car";
-//     str = "rat";
-//     std::cout<<"\nAre "<<str<<" and "<<str2<<" anagrams?  "<< strings_easy::isAnagram(str, str2)<<"\n";
+//     std::cout<<strings_easy::countAndSay(5);
 // }

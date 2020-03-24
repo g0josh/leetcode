@@ -14,4 +14,8 @@ bool isAnagram(std::string, std::string);
 bool isPalindrome(std::string);
 
 int myAtoi(std::string);
+
+std::string countAndSay(int);
+
+std::string longestCommonPrefix(std::vector<std::string>&);
 } //namespace strings_easy

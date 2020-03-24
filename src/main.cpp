@@ -126,12 +126,12 @@ int main(int argc, char** argv){
     #ifdef STRINGS
     #pragma region 
     
-    std::vector<char> str_vec = {'h','e','l','l','o'};
+    std::vector<char> char_vec = {'h','e','l','l','o'};
     std::cout<<"\nReversed ";
-    printVector(str_vec,-1);
-    strings_easy::reverseString(str_vec);
+    printVector(char_vec,-1);
+    strings_easy::reverseString(char_vec);
     std::cout<<" and got ";
-    printVector(str_vec,-1);
+    printVector(char_vec,-1);
     int input = 1534236469;
     std::cout<<"\nReversed "<<input<<" to "<<strings_easy::reverse(input)<<"\n";
 
@@ -148,6 +148,16 @@ int main(int argc, char** argv){
 
     str = "42";
     std::cout<<"\nAtoi of "<<str<<" = "<<strings_easy::myAtoi(str)<<"\n";
+
+    int n = 5;
+    std::cout<<"\nCount and say, level "<<n<<" = "<<strings_easy::countAndSay(n)<<"\n";
+
+    // std::vector<std::string> str_vec = {"flower","flow","flight"};
+    std::vector<std::string> str_vec = {};
+    std::cout<<"\nLongest common prefix in ";
+    printVector(str_vec,-1);
+    std::cout<<" is "<<strings_easy::longestCommonPrefix(str_vec)<<"\n";
+
 
     #pragma endregion
     #endif
