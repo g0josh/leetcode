@@ -71,9 +71,35 @@ def mergeTwoLists(l1: ListNode, l2: ListNode) -> ListNode:
             mergeCurr2()
     return head
 
+def isPalindrome(head: ListNode) -> bool:
+    result = 0
+    curr = head
+    while curr is not None:
+        result ^= ord(str(curr.value))
+        curr = curr.next
+    if result == 0 or (result > 47 and result < 58):
+        return True
+    else:
+        return False
+
+def hasCycle(head: ListNode) -> bool:
+    map = {}
+    index = 0
+    curr = head
+    while curr is not None:
+        _id = id(curr)
+        if _id in map:
+            return map[_id]
+        else:
+            map[_id] = index
+        index += 1
+        curr = curr.next
+    return -1
 
 if __name__ == "__main__":
-    ll = createNode([1])
-    ll2 = createNode([2])
+    ll = createNode([1, 2])
+    # ll2 = createNode([2])
     # rll = reverseList(ll)
-    mll = mergeTwoLists(ll, ll2)
+    # mll = mergeTwoLists(ll, ll2)
+    # print("Is palindrome = {}".format(isPalindrome(ll)))
+    print("List has a cycle = {}".format(hasCycle(ll)))
