@@ -18,14 +18,18 @@ def merge(nums1: List[int], m: int, nums2: List[int], n: int) -> None:
                 break
     return nums1
 
- def firstBadVersion(nums:List[int], n:int) -> int:
-     def temp(start, end):
-        mid = math.floor((end - start)/2)
-        if mid == n:
+def firstBadVersion(nums:List[int], n:int) -> int:
+    def temp(start, end):
+        if start <= end:
+            mid = start + (end - start)//2
+        if nums[mid] and not nums[mid-1] :
             return mid
-        elif mid > n:
-            pass
+        elif nums[mid] and nums[mid-1]:
+            return temp(start, mid)
+        elif not nums[mid] and not nums[mid-1]:
+            return temp(mid+1, end)
+    return temp(1, n)
 
 
 if __name__ == "__main__":
-    print(merge([1,2,3,0,0,0], 3, [2,5,6], 3))
+    print(firstBadVersion([False, False, False, False, True, True], 5))
