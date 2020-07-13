@@ -7,24 +7,17 @@ class TreeNode:
         self.left = left
         self.right = right
 
+def createBST(nums:List[Union[int, str]]) -> TreeNode:
+    def temp(index):
+        if index < len(nums):
+            t = TreeNode(nums[index])
+            t.left = temp(2*index+1)
+            t.right = temp(2*index+2)
+            return t
+        else:
+            return None
 
-def createBST(sequence: List[Union[int, str]]) -> TreeNode:
-    # Create a list of trees
-    forest = [TreeNode(x) for x in sequence]
-
-    # Fix up the left- and right links
-    count = len(forest)
-    for index, tree in enumerate(forest):
-        left_index = 2 * index + 1
-        if left_index < count:
-            tree.left = forest[left_index]
-
-        right_index = 2 * index + 2
-        if right_index < count:
-            tree.right = forest[right_index]
-
-    return forest[0]
-
+    return temp(0)
 
 def isValidBST(root: TreeNode) -> bool:
     if not root:
@@ -84,7 +77,7 @@ def sortedArrayToBST(nums: List[int]) -> TreeNode:
     return temp(0, len(nums))
 
 if __name__ == "__main__":
-    # bst = createBST([3,1,5,0,2,4,6,None,None,None, 3])
+    bst = createBST([3,1,5,0,2,4,6,None,None,None, 3])
     # bst = createBST([0, None, -1])
     # bst = createBST([2,1,3])
     # print(isValidBST(bst))
@@ -95,6 +88,6 @@ if __name__ == "__main__":
     # print(isSymmetric(bst))
 
     # bst = createBST([3,9,20,None,None,15,7])
-    # print(levelOrder(bst))
+    print(levelOrder(bst))
 
-    s = sortedArrayToBST([-10,-3,0,5,9])
+    # s = sortedArrayToBST([-10,-3,0,5,9])
