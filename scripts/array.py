@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from typing import List
 
 def intersect(nums1, nums2):
     smallMap = {}
@@ -39,11 +40,27 @@ def intersect(nums1, nums2):
             smallMap[ smallList[i] ] = 1
     return result
 
-def plusOne(digits):
-    
+#""""""""""""""""""""""""""""""""""""
+
+# MEDIUM
+
+#""""""""""""""""""""""""""""""""""""
+
+def threeSum(nums: List[int]) -> List[List[int]]:
+    twos = {}
+    ones = {}
+    result = []
+    for n in nums:
+        for k, v in twos.items():
+            if 0-(k+n) in ones:
+                result.append(ones[0-(k+n)] + [n])
+            else:
+                ones[0-(k+n)] = [v, n]
+        twos[n] = n
+    return result
 
 if __name__ == "__main__":
-    l1 = [4,9,5,4]
-    l2 = [9,4,9,8,4]
-    print(intersect(l1, l2))
-
+    # l1 = [4,9,5,4]
+    # l2 = [9,4,9,8,4]
+    # print(intersect(l1, l2))
+    print(threeSum([-1, 0, 1, 2, -1, -4]))
