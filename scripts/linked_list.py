@@ -96,10 +96,42 @@ def hasCycle(head: ListNode) -> bool:
         curr = curr.next
     return -1
 
+#""""""""""""""""""""""""""""""""""""
+
+# MEDIUM 
+
+#""""""""""""""""""""""""""""""""""""
+def addTwoNumbers(l1: ListNode, l2: ListNode) -> ListNode:
+    def temp(l1, l2, n, carry):
+        v1 = v2 = fini = 0
+        if l1 is None and l2 is None:
+            if not carry:
+                return None
+            else:
+                fini = 1
+        v1 = l1.value if l1 else 0
+        v2 = l2.value if l2 else 0
+        
+        _sum = v1 + v2 + carry
+        carry = 0
+        if _sum >= 10:
+            _sum = _sum-10
+            carry = 1
+        node = ListNode(_sum)
+        if fini:
+            return node
+        else:
+            node.next = temp(l1.next if l1 else None,
+                        l2.next if l2 else None,
+                        node, carry)
+        return node
+    return temp(l1, l2, None, 0)
+
 if __name__ == "__main__":
-    ll = createNode([1, 2])
-    # ll2 = createNode([2])
+    ll = createNode([2,4,3])
+    ll2 = createNode([5,6,7, 5])
     # rll = reverseList(ll)
     # mll = mergeTwoLists(ll, ll2)
     # print("Is palindrome = {}".format(isPalindrome(ll)))
-    print("List has a cycle = {}".format(hasCycle(ll)))
+    # print("List has a cycle = {}".format(hasCycle(ll)))
+    n = addTwoNumbers(ll, ll2)
